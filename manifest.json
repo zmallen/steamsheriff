@@ -1,0 +1,15 @@
+{
+    "manifest_version": 2,
+    "content_security_policy": "script-src 'self'; object-src 'self';",
+    "name": "Steam Sheriff",
+    "description": "Checks URLs visited by user to help prevent Steam phishing attacks",
+    "version": "0.2",
+    "background": {
+        "scripts": [ "background.js", "jdist.js", "ldist.js"  ]
+    },
+    "permissions": [
+        "webRequest",
+        "<all_urls>",
+        "webRequestBlocking"
+    ]
+}
