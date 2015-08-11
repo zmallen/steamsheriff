@@ -15,14 +15,19 @@ var whitelist =  [
   'raidcall.com',
   'ventrilo.com'
 ]
+var userWhitelist = [
+  'akamaihd.net'
+]
+var onceWhitelist = [
+]
 var brands =  {
   'image_full' : ['gyazo', 'flickr', 'imgur', 'photobucket', 'tinypic'],
   'dota'  : ['dota2lounge'],
   'cs'  : ['csgolounge', 'csgoticket', 'csgojackpot', 'csgoskins'],
   'steam' : ['steamcommunity'],
-  'voip'  : ['mumble', 'teamspeak', 'raidcall', 'ventrilo', 'zack']
+  'voip'  : ['mumble', 'teamspeak', 'raidcall', 'ventrilo']
 }
-var THRESHOLD = .90;
+var THRESHOLD = .85;
 var COUNT_THRESHOLD = .80;
 function shouldRedirect(base,target) {
   if (target.length / base.length >= COUNT_THRESHOLD) {
@@ -82,16 +87,47 @@ function getPrimaryDomain(domain) {
     return primaryDomain; 
 }
 
+function processNewOnceURL(onceUrl) {
+  var primaryDomain = getPrimaryDomain(getHostname(onceUrl));
+  onceWhitelist.push(primaryDomain);
+  setInterval(function() {
+    var index = onceWhitelist.indexOf(primaryDomain);
+    if (index > -1) {
+      onceWhitelist.splice(index,1);
+    }
+  },300000);
+}
+
+function processOnceURL(primaryDomain) {
+  return onceWhitelist.indexOf(primaryDomain) > -1;
+}
+
+function processUserWhitelist(primaryDomain) {
+  return userWhitelist.indexOf(primaryDomain) > -1;
+}
+
+function processNewUserWhitelistURL(url) {
+  userWhitelist.push(getPrimaryDomain(getHostname(url)));
+}
+
 chrome.webRequest.onBeforeRequest.addListener(
   function(details) {
     var url = details.url;
-/*    if (url.startsWith('chrome-extension')) {
+    if (url.startsWith('chrome-extension://')) {
       return {  cancel : false  };
-    }*/
+    }
     var hostname = getHostname(url);
     var primaryDomain = getPrimaryDomain(hostname); 
-    var found = whitelist.indexOf(primaryDomain) > -1;
-    if(!found) {
+    var onOnceWhitelist = processOnceURL(primaryDomain);
+    if (onOnceWhitelist) {
+      return {  cancel : false };
+    }
+    var onUserWhitelist = processUserWhitelist(primaryDomain);
+    if (onUserWhitelist) {
+      return {  cancel : false };
+    }
+    var onWhitelist = whitelist.indexOf(primaryDomain) > -1; 
+    if(!onWhitelist) {
       var intel = checkUrl(url);
       if(intel.cancel) {
         var warning = chrome.extension.getURL('warning.html'+

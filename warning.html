@@ -1,48 +1,161 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang='en'>
     <head>
         <title>WARNING</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <script type="text/javascript" src="warning.js"></script>
-        <style type="text/css">
-            body {
-                background-color: #D33;
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+        <script type='text/javascript' src='warning.js'></script>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto:700,300,100' rel='stylesheet' type='text/css'>
+<script src='js/jquery-2.1.4.min.js'></script>
+<script src='js/jquery-ui.js'></script>
+<script src='js/acc.js'></script>
+</script>
+    <style type="text/css">
+            
+           body {
+                background-color: #515151;
                 color: #fff;
                 text-align: center;
                 margin: 0;
+                font-family: 'Roboto', 'Open Sans', sans-serif;
             }
-            h1,h2 {
-                font-weight: normal;
+            
+            .header{
+                margin: 100px 0px 60px;
+                color:#f37c49;
+                border-top: 2px solid #2f2f2f;
+                border-bottom: 2px solid #666666;
+                background-color: #3f3f3f;
+                padding-bottom: 15px;
+            }
+            .footer {
+                font-size: 12px;
+            }
+            .a_footer {
+                font-size: 12px;
             }
             h1 {
-                font-size: 130px;
-                margin: 50px 0px 20px;
-                background-color: #fff;
-                color: #D33;
+                font-size: 8.125em;
+                font-weight: 700;
+                color:#f37c49;
             }
+            
             h2 {
-                font-size: 90px;
-                margin: 20px 0px 50px;
+                font-size: 1.875em;
+                margin-top: -100px;
+                font-weight: 100;
+                color:#fff;
             }
-            #butn {
-                border-radius: 20px;
-                background-color: #fff;
-                padding: 15px 30px;
-                font-size: 20px;
+            p{
+                margin-top: 10px;
+            }
+
+            .buttons{
+                width: 60%;
+                max-width:800px;
+                margin: 0 auto;
+            }
+            
+            .button1{
+                padding:2.5%;
+                border:1px solid #ccc;
+                width:40%;
+                border-radius: 5px;
+                display: inline-block;
+                text-transform: uppercase;
+                font-weight: 100;
+                color:#ccc;
+                margin-bottom: 25px;
+            }
+            
+            .button1:hover{
+                color:#fff;
+                background: rgba(255,255,255,0.1);
+                border:1px solid #fff;
+            }
+            
+            
+            #button2{
+                background:#f37c49;
+                width:86%;
+                padding:2.5%;
+                border-radius:5px;
+                text-transform: uppercase;
+                font-weight: 700;
+                display: inline-block;
+            }
+            
+            #button2:hover{
+                background-color:#f25e48;
+            }
+            
+            a{
+                color:#fff;
+                font-size: 18px;
                 text-decoration: none;
-                color: #D33;
-                margin: 30px auto;
-                display: block;
-                width: 80%;
             }
+            
+            .accBtn{
+                color: #f37c49;
+                font-weight: 700;
+                border-bottom: 4px double rgba(243,124,73,0.3);
+            }
+            
+            #accordion {
+                width: 300px;
+                margin: 50px auto;
+            }
+            
+            #accordion .ui-accordion-content > * {
+                margin: 10px;
+                padding: 10px;
+            }
+            
+            div p{
+                margin: 0;
+            }
+            
+            .small{
+                height: 50px;
+                padding: 0;
+                margin: 0;
+                font-weight: 100;
+                color:#fff;
+            }
+
         </style>
     </head>
     <body>
+        <section class='header'>
         <h1>WARNING</h1>
-        <h2>YOU ARE ABOUT TO <u>SERIOUSLY FUCK UP</u> YOUR&nbsp;PC</h2>
-        <p>Options:</p>
-        <a id="butn" href="#">Continue Once</a>
-        <a id="butn" href="#">Continue & Whitelist</a>
-        <a id="butn" href="#">Get me out!</a>
+        <h2>SteamSheriff thinks this site is malicious!</h2>
+        <div id='accordion'>
+            <a href="#" class="accBtn">WHY?</a>
+            <div>
+                <p><b>URL:</b></p>The following URL that you tried connecting to has a high potential of being a phishing/malware website<div id='badurl' class="small"></div>
+                <p><b>Brand:</b></p>Steam Sheriff detected a high similarity to a whitelisted website listed below<div id='brand' class="small"></div></p>
+                <p><b>Part:</b></p>Steam Sheriff triggered on the following part of the 'bad' URL, which closely matches the whitelisted brand<div id='part' class="small"></div></p>
+            </div>
+        </div>
+        </section>
+        
+        <section class='buttons'>
+        <div class='button1'><a id='continueOnce' href='#'>Continue Once</a></div>
+        <div class='button1'><a id='continueWhitelist' href='#'>Continue & Whitelist</a></div>
+        <a id='abort' href='#'><div id='button2'>Get me out!</div></a>
+        </section>
     </body>
+    <footer>
+    <section class='footer'>
+    <p>Steam Sheriff 2015 - Zack Allen</p>
+    <p>Contact information: <a class='footer' href="mailto:steamsheriff@gmail.com">E-mail</a></p>
+    <p>I do this on my own free time and would appreciate any donations to help host code and pay designers is appreciated</p>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="JLYC8X9WYBEN8">
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+    </section>
+    </footer>
 </html>
